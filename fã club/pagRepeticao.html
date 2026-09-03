@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Estruturas de Repetição</title>
+    <link rel="stylesheet" type="text/css" href="css/site.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="imgs/imagemLogo.png" alt="logo da página" title="logo da página">
+        <h1>Estruturas de Repetição</h1>
+    </header>
+
+    <nav>
+        <a href="pagPrincipal.html"> <div class="opcao"> Início </div> </a>
+        <a href="javascript:void(0)" onclick="rolarParaAtividade()"> <div class="opcao"> Atividade </div> </a>
+        <a href="pagUnidimencional.html"> <div class="opcao"> Proxima Trilha </div> </a>
+    </nav>
+
+    <section>
+        <h2>Resumo</h2>
+
+        <p style="text-align: center;">
+            As estruturas de repetição são ferramentas que permitem ao seu código executar um mesmo bloco de instruções várias vezes, sem precisar reescrevê-lo. Elas funcionam como um "loop": o programa repete uma ação enquanto uma condição for verdadeira ou até que um número definido de repetições seja atingido.
+        </p>
+
+        <div class="exemplos" id="blocoExemplos">
+
+            <section>
+                <h3>Exemplo 01</h3>
+                <p>
+                    Imagine que estamos programando o sistema de controle de estoque da loja. Ele precisa verificar, um por um, cada produto guardado no depósito.
+                </p>
+
+                <img src="imgs/exemploRepeti01.png" alt="Código de exemplo mostrando o laço for para verificar produtos no estoque" title="Exemplo 01 - estrutura de repetição for" style="display: block; margin: 0 auto;">
+
+                <h3>Entendendo o código passo a passo</h3>
+                <dl>
+                    <dt>Inicialização (var i = 1)</dt>
+                    <dd>É o ponto de partida do laço. Aqui criamos uma variável contadora que começa em 1, representando o primeiro produto.</dd>
+
+                    <dt>Condição (i &lt;= total)</dt>
+                    <dd>Antes de cada repetição, o programa pergunta: "Ainda existem produtos para verificar?". Enquanto a resposta for verdadeira, o laço continua.</dd>
+
+                    <dt>Incremento (i++)</dt>
+                    <dd>Depois de cada repetição, o contador aumenta em 1. É o que garante que o laço vá avançando produto por produto, até não sobrar nenhum.</dd>
+                </dl>
+
+                <section>
+                    <h3>Exemplo 02</h3>
+                    <p>
+                        Imagine agora que estamos simulando o carregamento de uma bateria. O sistema precisa repetir o processo de carregar até que ela chegue a 100%.
+                    </p>
+
+                    <img src="imgs/exemploRepeti02.png" alt="Código de exemplo mostrando o laço while para simular o carregamento da bateria" title="Exemplo 02 - estrutura de repetição while" style="display: block; margin: 0 auto;">
+
+                    <h3>Entendendo o código passo a passo</h3>
+                    <dl>
+                        <dt>while</dt>
+                        <dd>Testa a condição antes de cada repetição. Enquanto a carga da bateria for menor que 100%, o laço continua rodando.</dd>
+
+                        <dt>Corpo do laço</dt>
+                        <dd>A cada repetição, a carga da bateria aumenta um pouco (por exemplo, 10%), simulando o processo de carregamento.</dd>
+
+                        <dt>Fim do laço</dt>
+                        <dd>Assim que a condição se torna falsa (a bateria chega a 100% ou mais), o programa para de repetir e segue para a próxima instrução.</dd>
+                    </dl>
+
+                    <h3>Agora vamos aos testes!</h3>
+
+                    <!-- teste ex 01 -->
+                    <div class="caixa-teste">
+                        <h3>Teste o Exemplo 01</h3>
+
+                        <label for="totalProdutos">Quantos produtos verificar:</label><br>
+                        <input type="number" id="totalProdutos" value="5">
+                        <br>
+
+                        <button onclick="testarEstoque()">Executar</button>
+                    </div>
+
+                    <div class="container-botao-codigo">
+                        <button onclick="mostrarCodigo('codigo01')">Ver código</button>
+                    </div>
+
+                    <pre id="codigo01" class="bloco-codigo">
+<code>function testarEstoque() {
+    var total = document.getElementById("totalProdutos").value;
+    var mensagem = "";
+
+    for (var i = 1; i <= total; i++) {
+        mensagem = mensagem + "Verificando produto " + i + "\n";
+    }
+
+    alert(mensagem);
+}</code>
+                    </pre>
+
+                    <!-- teste ex 02 -->
+                    <div class="caixa-teste">
+                        <h3>Teste o Exemplo 02</h3>
+
+                        <label for="cargaInicial">Carga inicial da bateria (0 a 90):</label><br>
+                        <input type="number" id="cargaInicial" value="30">
+                        <br>
+
+                        <button onclick="testarCarregamento()">Executar</button>
+                    </div>
+
+                    <div class="container-botao-codigo">
+                        <button onclick="mostrarCodigo('codigo02')">Ver código</button>
+                    </div>
+
+                    <pre id="codigo02" class="bloco-codigo">
+<code>function testarCarregamento() {
+    var carga = document.getElementById("cargaInicial").value;
+    var mensagem = "";
+
+    while (carga < 100) {
+        carga = carga + 10;
+        mensagem = mensagem + "Carregando... " + carga + "%\n";
+    }
+
+    mensagem = mensagem + "Bateria totalmente carregada!";
+
+    alert(mensagem);
+}</code>
+                    </pre>
+
+                </section>
+            </section>
+        </div>
+
+        <script>
+            function rolarParaAtividade() {
+                document.getElementById("atividade01").scrollIntoView({
+                    behavior: "smooth"
+                });
+            }
+
+            function mostrarCodigo(id) {
+                var bloco = document.getElementById(id);
+
+                if (bloco.style.display === "none") {
+                    bloco.style.display = "block";
+                } else {
+                    bloco.style.display = "none";
+                }
+            }
+
+            // estoque
+            function testarEstoque() {
+                var total = document.getElementById("totalProdutos").value;
+                var mensagem = "";
+
+                for (var i = 1; i <= total; i++) {
+                    mensagem = mensagem + "Verificando produto " + i + "\n";
+                }
+
+                alert(mensagem);
+            }
+
+            // carregamento
+            function testarCarregamento() {
+                var carga = document.getElementById("cargaInicial").value;
+                var mensagem = "";
+
+                while (carga < 100) {
+                    carga = carga + 10;
+                    mensagem = mensagem + "Carregando... " + carga + "%\n";
+                }
+
+                mensagem = mensagem + "Bateria totalmente carregada!";
+
+                alert(mensagem);
+            }
+        </script>
+
+        <h2>Agora Vamos a Atividades</h2>
+
+        <div class="exemplos">
+            <p>
+                Uma etapa por vez: estamos juntos no processo e o resultado virá
+            </p>
+
+            <section id="atividade01">
+                <h3>Atividade 01</h3>
+                <p>
+                    Uma loja quer exibir a tabuada de um produto vendido em caixas, para ajudar o cliente a calcular quantas unidades tem em várias caixas.
+                    Escreva um programa em JavaScript que use um laço for para exibir a tabuada (de 1 a 10) de um número informado pelo cliente.
+                </p>
+
+                <!-- teste atividade 01 -->
+                <div class="caixa-teste">
+                    <h3>Teste a Atividade 01</h3>
+
+                    <label for="numeroTabuada">Digite o número:</label><br>
+                    <input type="number" id="numeroTabuada" value="5">
+                    <br>
+
+                    <button onclick="testarTabuada()">Executar</button>
+                </div>
+
+                <div class="container-botao-codigo">
+                    <button onclick="mostrarCodigo('codigoAtividade01')">Ver código</button>
+                </div>
+
+                <pre id="codigoAtividade01" class="bloco-codigo">
+<code>function testarTabuada() {
+    var numero = document.getElementById("numeroTabuada").value;
+    var mensagem = "";
+
+    for (var i = 1; i <= 10; i++) {
+        mensagem = mensagem + numero + " x " + i + " = " + (numero * i) + "\n";
+    }
+
+    alert(mensagem);
+}</code>
+                </pre>
+
+                <script>
+                    function testarTabuada() {
+                        var numero = document.getElementById("numeroTabuada").value;
+                        var mensagem = "";
+
+                        for (var i = 1; i <= 10; i++) {
+                            mensagem = mensagem + numero + " x " + i + " = " + (numero * i) + "\n";
+                        }
+
+                        alert(mensagem);
+                    }
+                </script>
+
+                <section>
+                    <h3>Atividade 02</h3>
+                    <p>
+                        O caixa da loja precisa somar o valor de vários produtos idênticos comprados por um cliente, um de cada vez, até que a quantidade desejada seja atingida.
+                        Escreva um programa em JavaScript que use um laço while para calcular a soma de um valor unitário repetido uma certa quantidade de vezes.
+                    </p>
+
+                    <!-- teste atividade 02 -->
+                    <div class="caixa-teste">
+                        <h3>Teste a Atividade 02</h3>
+
+                        <label for="valorUnitario">Valor unitário (R$):</label><br>
+                        <input type="number" id="valorUnitario" value="25">
+                        <br>
+
+                        <label for="quantidadeItens">Quantidade de itens:</label><br>
+                        <input type="number" id="quantidadeItens" value="4">
+                        <br>
+
+                        <button onclick="testarSomaCompra()">Executar</button>
+                    </div>
+
+                    <div class="container-botao-codigo">
+                        <button onclick="mostrarCodigo('codigoAtividade02')">Ver código</button>
+                    </div>
+
+                    <pre id="codigoAtividade02" class="bloco-codigo">
+<code>function testarSomaCompra() {
+    var valorUnitario = document.getElementById("valorUnitario").value;
+    var quantidade = document.getElementById("quantidadeItens").value;
+    var total = 0;
+    var contador = 0;
+
+    while (contador < quantidade) {
+        total = total + valorUnitario;
+        contador = contador + 1;
+    }
+
+    alert("Total final da compra: R$ " + total);
+}</code>
+                    </pre>
+
+                    <script>
+                        function testarSomaCompra() {
+                            var valorUnitario = document.getElementById("valorUnitario").value;
+                            var quantidade = document.getElementById("quantidadeItens").value;
+                            var total = 0;
+                            var contador = 0;
+
+                            while (contador < quantidade) {
+                                total = total + valorUnitario;
+                                contador = contador + 1;
+                            }
+
+                            alert("Total final da compra: R$ " + total);
+                        }
+                    </script>
+
+                </section>
+            </section>
+        </div>
+    </section>
+
+    <!-- rodapé. -->
+    <footer>Trabalho Final JS ads 2026/2</footer>
+
+</body>
+</html>

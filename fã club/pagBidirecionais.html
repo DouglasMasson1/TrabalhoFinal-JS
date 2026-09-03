@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Matrizes</title>
+    <link rel="stylesheet" type="text/css" href="css/site.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="imgs/imagemLogo.png" alt="logo da página" title="logo da página">
+        <h1>Matrizes</h1>
+    </header>
+
+    <nav>
+        <a href="pagPrincipal.html"> <div class="opcao"> Início </div> </a>
+        <a href="javascript:void(0)" onclick="rolarParaAtividade()"> <div class="opcao"> Atividade </div> </a>
+        <a href="pagFuncoes.html"> <div class="opcao"> Proxima Trilha </div> </a>
+    </nav>
+
+    <section>
+        <h2>Resumo</h2>
+
+        <p style="text-align: center;">
+            Matrizes (vetores bidimensionais) são estruturas que organizam valores em linhas e colunas, como uma tabela. Cada valor é acessado através de duas posições: o índice da linha e o índice da coluna, ambos começando em 0. Elas funcionam como um vetor de vetores: cada linha é, por si só, um vetor.
+        </p>
+
+        <div class="exemplos" id="blocoExemplos">
+
+            <section>
+                <h3>Exemplo 01</h3>
+                <p>
+                    Imagine que estamos programando o sistema de vendas de uma rede de lojas. Cada linha da matriz representa uma loja, e cada coluna representa as vendas de um dia da semana.
+                </p>
+
+                <img src="imgs/exemploMatriz01.png" alt="Código de exemplo mostrando o percurso de uma matriz para somar vendas" title="Exemplo 01 - matriz de vendas por loja" style="display: block; margin: 0 auto;">
+
+                <h3 style="text-align: center;">Entendendo o código passo a passo</h3>
+                <dl>
+                    <dt>Declaração da matriz</dt>
+                    <dd>Criamos um vetor de vetores, como <code>var vendas = [[50,120,35],[80,90,40]];</code>. Cada posição externa é uma linha (loja), e cada posição interna é uma coluna (dia).</dd>
+
+                    <dt>Percorrendo a matriz (for dentro de for)</dt>
+                    <dd>Usamos um laço <code>for</code> externo para percorrer as linhas, e outro <code>for</code> interno para percorrer as colunas de cada linha, acessando cada valor com <code>vendas[i][j]</code>.</dd>
+
+                    <dt>Acumulando o resultado</dt>
+                    <dd>A cada volta do laço interno, somamos o valor da posição atual a uma variável total, até percorrer toda a matriz.</dd>
+                </dl>
+
+                <section>
+                    <h3>Exemplo 02</h3>
+                    <p>
+                        Imagine agora que estamos verificando o desempenho de vendedores em uma matriz e queremos descobrir qual foi a maior venda registrada.
+                    </p>
+
+                    <img src="imgs/exemploMatriz02.png" alt="Código de exemplo mostrando a busca do maior valor em uma matriz" title="Exemplo 02 - busca de maior valor em matriz" style="display: block; margin: 0 auto;">
+
+                    <h3 style="text-align: center;">Entendendo o código passo a passo</h3>
+                    <dl>
+                        <dt>Valor inicial</dt>
+                        <dd>Começamos assumindo que o maior valor é o primeiro item da matriz (<code>vendas[0][0]</code>).</dd>
+
+                        <dt>Comparação a cada posição</dt>
+                        <dd>Percorremos a matriz com dois laços (linha e coluna), comparando cada posição com o maior valor encontrado até o momento.</dd>
+
+                        <dt>Atualização do maior valor</dt>
+                        <dd>Sempre que encontramos um valor maior que o atual "maior", atualizamos a variável. Ao final dos laços, ela contém o maior valor da matriz.</dd>
+                    </dl>
+
+                    <h3>Agora vamos aos testes!</h3>
+
+                    <!-- teste ex 01 -->
+                    <div class="caixa-teste">
+                        <h3>Teste o Exemplo 01</h3>
+
+                        <label for="vendasLojas">Digite as vendas (linhas separadas por ; e valores por ,):</label><br>
+                        <input type="text" id="vendasLojas" value="50,120,35;80,90,40">
+                        <br>
+
+                        <button onclick="testarSomaMatriz()">Executar</button>
+
+                        <p id="resultadoSomaMatriz"></p>
+                    </div>
+
+                    <div class="container-botao-codigo">
+                        <button onclick="mostrarCodigo('codigo01')">Ver código </button>
+                    </div>
+
+                    <pre id="codigo01" class="bloco-codigo">
+<code>function testarSomaMatriz() {
+    var texto = document.getElementById("vendasLojas").value;
+    var linhas = texto.split(";");
+    var vendas = [];
+
+    for (var i = 0; i < linhas.length; i++) {
+        vendas.push(linhas[i].split(",").map(Number));
+    }
+
+    var total = 0;
+    var mensagem = "";
+
+    for (var i = 0; i < vendas.length; i++) {
+        for (var j = 0; j < vendas[i].length; j++) {
+            total += vendas[i][j];
+            mensagem += "Loja " + i + ", dia " + j + ": R$ " + vendas[i][j] + "<br>";
+        }
+    }
+
+    mensagem += "Total geral de vendas: R$ " + total;
+
+    document.getElementById("resultadoSomaMatriz").innerHTML = mensagem;
+}</code>
+                    </pre>
+
+                    <!-- teste ex 02 -->
+                    <div class="caixa-teste">
+                        <h3>Teste o Exemplo 02</h3>
+
+                        <p>Este exemplo já usa uma matriz fixa de vendas: [[50,120,35],[80,200,40]].</p>
+
+                        <button onclick="testarMaiorVenda()">Executar</button>
+                    </div>
+
+                    <div class="container-botao-codigo">
+                        <button onclick="mostrarCodigo('codigo02')">Ver codigo</button>
+                    </div>
+
+                    <pre id="codigo02" class="bloco-codigo">
+<code>function testarMaiorVenda() {
+    var vendas = [[50, 120, 35], [80, 200, 40]];
+    var maior = vendas[0][0];
+
+    for (var i = 0; i < vendas.length; i++) {
+        for (var j = 0; j < vendas[i].length; j++) {
+            if (vendas[i][j] > maior) {
+                maior = vendas[i][j];
+            }
+        }
+    }
+
+    alert("A maior venda encontrada foi: R$ " + maior);
+}</code>
+                    </pre>
+
+                </section>
+            </section>
+        </div>
+
+        <script>
+            function rolarParaAtividade() {
+                document.getElementById("atividade01").scrollIntoView({
+                    behavior: "smooth"
+                });
+            }
+
+            function mostrarCodigo(id) {
+                var bloco = document.getElementById(id);
+
+                if (bloco.style.display === "none") {
+                    bloco.style.display = "block";
+                } else {
+                    bloco.style.display = "none";
+                }
+            }
+
+            // soma da matriz de vendas
+            function testarSomaMatriz() {
+                var texto = document.getElementById("vendasLojas").value;
+                var linhas = texto.split(";");
+                var vendas = [];
+
+                for (var i = 0; i < linhas.length; i++) {
+                    vendas.push(linhas[i].split(",").map(Number));
+                }
+
+                var total = 0;
+                var mensagem = "";
+
+                for (var i = 0; i < vendas.length; i++) {
+                    for (var j = 0; j < vendas[i].length; j++) {
+                        total += vendas[i][j];
+                        mensagem += "Loja " + i + ", dia " + j + ": R$ " + vendas[i][j] + "<br>";
+                    }
+                }
+
+                mensagem += "Total geral de vendas: R$ " + total;
+
+                document.getElementById("resultadoSomaMatriz").innerHTML = mensagem;
+            }
+
+            // maior venda da matriz (versão simplificada)
+            function testarMaiorVenda() {
+                var vendas = [[50, 120, 35], [80, 200, 40]];
+                var maior = vendas[0][0];
+
+                for (var i = 0; i < vendas.length; i++) {
+                    for (var j = 0; j < vendas[i].length; j++) {
+                        if (vendas[i][j] > maior) {
+                            maior = vendas[i][j];
+                        }
+                    }
+                }
+
+                alert("A maior venda encontrada foi: R$ " + maior);
+            }
+        </script>
+
+        <h2>Agora Vamos a Atividades</h2>
+
+        <div class="exemplos">
+            <p>
+                Uma etapa por vez: estamos juntos no processo e o resultado virá
+            </p>
+
+            <section id="atividade01">
+                <h3>Atividade 01</h3>
+                <p>
+                    Uma loja quer calcular a média de temperatura registrada em várias geladeiras, ao longo de vários dias.
+                    Escreva um programa em JavaScript que armazene as temperaturas em uma matriz e use dois laços for para calcular a média geral dos valores.
+                </p>
+
+                <!-- teste atividade 01 -->
+                <div class="caixa-teste">
+                    <h3>Teste a Atividade 01</h3>
+
+                    <label for="temperaturasGeladeiras">Digite as temperaturas (linhas separadas por ; e valores por ,):</label><br>
+                    <input type="text" id="temperaturasGeladeiras" value="4,5,3;6,4,5">
+                    <br>
+
+                    <button onclick="testarMediaTemperaturas()">Executar</button>
+
+                    <p id="resultadoMediaTemperaturas"></p>
+                </div>
+
+                <div class="container-botao-codigo">
+                    <button onclick="mostrarCodigo('codigoAtividade01')">Ver código </button>
+                </div>
+
+                <pre id="codigoAtividade01" class="bloco-codigo">
+<code>function testarMediaTemperaturas() {
+    var texto = document.getElementById("temperaturasGeladeiras").value;
+    var linhas = texto.split(";");
+    var temperaturas = [];
+
+    for (var i = 0; i < linhas.length; i++) {
+        temperaturas.push(linhas[i].split(",").map(Number));
+    }
+
+    var soma = 0;
+    var contador = 0;
+
+    for (var i = 0; i < temperaturas.length; i++) {
+        for (var j = 0; j < temperaturas[i].length; j++) {
+            soma += temperaturas[i][j];
+            contador++;
+        }
+    }
+
+    var media = soma / contador;
+
+    document.getElementById("resultadoMediaTemperaturas").innerHTML = "A média geral de temperatura é: " + media.toFixed(2) + "°C";
+}</code>
+                </pre>
+
+                <script>
+                    function testarMediaTemperaturas() {
+                        var texto = document.getElementById("temperaturasGeladeiras").value;
+                        var linhas = texto.split(";");
+                        var temperaturas = [];
+
+                        for (var i = 0; i < linhas.length; i++) {
+                            temperaturas.push(linhas[i].split(",").map(Number));
+                        }
+
+                        var soma = 0;
+                        var contador = 0;
+
+                        for (var i = 0; i < temperaturas.length; i++) {
+                            for (var j = 0; j < temperaturas[i].length; j++) {
+                                soma += temperaturas[i][j];
+                                contador++;
+                            }
+                        }
+
+                        var media = soma / contador;
+
+                        document.getElementById("resultadoMediaTemperaturas").innerHTML = "A média geral de temperatura é: " + media.toFixed(2) + "°C";
+                    }
+                </script>
+
+                <section>
+                    <h3>Atividade 02</h3>
+                    <p>
+                        O sistema da loja precisa verificar quantas vezes um determinado produto aparece registrado em uma matriz de códigos de estoque, organizada por prateleira.
+                        Escreva um programa em JavaScript que percorra uma matriz de códigos e conte quantas vezes um código informado pelo cliente aparece.
+                    </p>
+
+                    <!-- teste atividade 02 -->
+                    <div class="caixa-teste">
+                        <h3>Teste a Atividade 02</h3>
+
+                        <label for="codigosPrateleiras">Digite os códigos (linhas separadas por ; e valores por ,):</label><br>
+                        <input type="text" id="codigosPrateleiras" value="101,203,101;305,101,450">
+                        <br>
+
+                        <label for="codigoBuscaMatriz">Digite o código a buscar:</label><br>
+                        <input type="number" id="codigoBuscaMatriz" value="101">
+                        <br>
+
+                        <button onclick="testarBuscaCodigoMatriz()">Executar</button>
+
+                        <p id="resultadoBuscaCodigoMatriz"></p>
+                    </div>
+
+                    <div class="container-botao-codigo">
+                        <button onclick="mostrarCodigo('codigoAtividade02')">Ver código </button>
+                    </div>
+
+                    <pre id="codigoAtividade02" class="bloco-codigo">
+<code>function testarBuscaCodigoMatriz() {
+    var texto = document.getElementById("codigosPrateleiras").value;
+    var linhas = texto.split(";");
+    var codigos = [];
+
+    for (var i = 0; i < linhas.length; i++) {
+        codigos.push(linhas[i].split(",").map(Number));
+    }
+
+    var busca = parseInt(document.getElementById("codigoBuscaMatriz").value);
+    var contador = 0;
+
+    for (var i = 0; i < codigos.length; i++) {
+        for (var j = 0; j < codigos[i].length; j++) {
+            if (codigos[i][j] === busca) {
+                contador++;
+            }
+        }
+    }
+
+    var mensagem = "";
+    if (contador > 0) {
+        mensagem = "O código " + busca + " foi encontrado " + contador + " vez(es) no estoque.";
+    } else {
+        mensagem = "O código " + busca + " não foi encontrado no estoque.";
+    }
+
+    document.getElementById("resultadoBuscaCodigoMatriz").innerHTML = mensagem;
+}</code>
+                    </pre>
+
+                    <script>
+                        function testarBuscaCodigoMatriz() {
+                            var texto = document.getElementById("codigosPrateleiras").value;
+                            var linhas = texto.split(";");
+                            var codigos = [];
+
+                            for (var i = 0; i < linhas.length; i++) {
+                                codigos.push(linhas[i].split(",").map(Number));
+                            }
+
+                            var busca = parseInt(document.getElementById("codigoBuscaMatriz").value);
+                            var contador = 0;
+
+                            for (var i = 0; i < codigos.length; i++) {
+                                for (var j = 0; j < codigos[i].length; j++) {
+                                    if (codigos[i][j] === busca) {
+                                        contador++;
+                                    }
+                                }
+                            }
+
+                            var mensagem = "";
+                            if (contador > 0) {
+                                mensagem = "O código " + busca + " foi encontrado " + contador + " vez(es) no estoque.";
+                            } else {
+                                mensagem = "O código " + busca + " não foi encontrado no estoque.";
+                            }
+
+                            document.getElementById("resultadoBuscaCodigoMatriz").innerHTML = mensagem;
+                        }
+                    </script>
+
+                </section>
+            </section>
+        </div>
+    </section>
+
+    <!-- rodapé. -->
+    <footer>Trabalho Final JS ads 2026/2 </footer>
+
+</body>
+</html>

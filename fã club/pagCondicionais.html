@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Estruturas Condicionais</title>
+    <link rel="stylesheet" type="text/css" href="css/site.css">
+</head>
+<body>
+
+    <header>
+        <img src="imgs/imagemLogo.png" alt="logo da página" title="logo da página">
+        <h1>Estruturas Condicionais</h1>
+    </header>
+
+    <nav>
+        <a href="pagPrincipal.html"> <div class="opcao"> Início </div> </a>
+        <a href="#vamos-atividades"> <div class="opcao"> Atividade </div> </a>
+        <a href="pagRepeticao.html"> <div class="opcao"> Proxima Trilha </div> </a>
+    </nav>
+
+    <section>
+        <h2>Resumo</h2>
+
+        <p style="text-align: center;">
+            As estruturas condicionais são ferramentas que permitem ao seu código tomar decisões sozinho. Elas funcionam como bifurcações em uma estrada: o programa analisa uma condição e decide qual caminho seguir.
+        </p>
+
+        <div class="exemplos" id="blocoExemplos">
+
+            <section>
+                <h3>Exemplo 01</h3>
+                <p>
+                    Imagine que estamos programando o sistema de um carro autônomo. Ele precisa ler a cor do semáforo e decidir o que fazer.
+                </p>
+
+                <img src="imgs/exemploEstrutura01.png" alt="Código de exemplo mostrando if, else if e else para verificar a cor do semáforo" title="Exemplo 01 - estrutura condicional do semáforo" style="display: block; margin: 0 auto;">
+
+                <h3>Entendendo o código passo a passo</h3>
+                <dl>
+                    <dt>if (Se)</dt>
+                    <dd>É a primeira tentativa. O programa pergunta: "A cor é verde?". Se for, ele executa o que está nos primeiros colchetes e ignora o resto.</dd>
+
+                    <dt>else if (Senão se)</dt>
+                    <dd>Se a primeira pergunta der falso, ele tenta esta segunda opção: "Bem, se não é verde, será que é amarelo?"</dd>
+
+                    <dt>else (Senão / Caso contrário)</dt>
+                    <dd>É o seu plano de segurança. Se o sinal não for verde e não for amarelo (ou seja, se for vermelho ou se faltar energia), o programa cai direto aqui e manda parar.</dd>
+                </dl>
+
+                <section>
+                    <h3>Exemplo 02</h3>
+                    <p>
+                        Imagine que estamos programando o sistema de um carro autônomo. Ele precisa ler o nível da bateria e decidir o que fazer.
+                    </p>
+
+                    <img src="imgs/exemploEstrutura02.png" alt="Código de exemplo mostrando if, else if e else para verificar o nível de bateria do carro" title="Exemplo 02 - estrutura condicional da bateria" style="display: block; margin: 0 auto;">
+
+                    <h3>Entendendo o código passo a passo</h3>
+                    <dl>
+                        <dt>if</dt>
+                        <dd>Testa se a bateria está exatamente em 100%. Se estiver, avisa para tirar do carregador.</dd>
+
+                        <dt>else if</dt>
+                        <dd>Só é executado se a primeira condição for falsa. Ele checa se a carga está em 20% ou menos, alertando para ativar a economia.</dd>
+
+                        <dt>else</dt>
+                        <dd>Funciona como uma "saída padrão". Se a bateria não estiver cheia e nem fraca (ou seja, estiver entre 21% e 99%), ele roda a mensagem de uso normal.</dd>
+                    </dl>
+
+                    <h3>Agora vamos aos testes!</h3>
+
+                    <!-- teste ex 01 -->
+                    <div class="caixa-teste">
+                        <h3>Teste o Exemplo 01</h3>
+
+                        <label for="corSemaforo">Escolha a cor:</label><br>
+                        <select id="corSemaforo">
+                            <option value="verde">Verde</option>
+                            <option value="amarelo">Amarelo</option>
+                            <option value="vermelho">Vermelho</option>
+                        </select>
+                        <br>
+
+                        <button onclick="testarSemaforo()">Executar</button>
+                    </div>
+
+                    <pre class="bloco-codigo">
+<code>function testarSemaforo() {
+    var cor = document.getElementById("corSemaforo").value;
+
+    if (cor == "verde") {
+        alert("Pode seguir!");
+    } else if (cor == "amarelo") {
+        alert("Atenção, reduza a velocidade!");
+    } else {
+        alert("Pare o carro!");
+    }
+}</code>
+                    </pre>
+
+                    <!-- teste ex 02 -->
+                    <div class="caixa-teste">
+                        <h3>Teste o Exemplo 02</h3>
+
+                        <label for="nivelBateria">Nível da bateria (0 a 100):</label><br>
+                        <input type="number" id="nivelBateria" value="50">
+                        <br>
+
+                        <button onclick="testarBateria()">Executar</button>
+                    </div>
+
+                    <pre class="bloco-codigo">
+<code>function testarBateria() {
+    var bateria = document.getElementById("nivelBateria").value;
+
+    if (bateria == 100) {
+        alert("Bateria cheia, tire do carregador.");
+    } else if (bateria <= 20) {
+        alert("Bateria fraca, ativando economia.");
+    } else {
+        alert("Uso normal do Smartphone.");
+    }
+}</code>
+                    </pre>
+
+                </section>
+            </section>
+        </div>
+
+        <script>
+            // semaforo
+            function testarSemaforo() {
+                var cor = document.getElementById("corSemaforo").value;
+
+                if (cor == "verde") {
+                    alert("Pode seguir!");
+                } else if (cor == "amarelo") {
+                    alert("Atenção, reduza a velocidade!");
+                } else {
+                    alert("Pare o carro!");
+                }
+            }
+
+            // bateria
+            function testarBateria() {
+                var bateria = document.getElementById("nivelBateria").value;
+
+                if (bateria == 100) {
+                    alert("Bateria cheia, tire do carregador.");
+                } else if (bateria <= 20) {
+                    alert("Bateria fraca, ativando economia.");
+                } else {
+                    alert("Uso normal do Smartphone.");
+                }
+            }
+        </script>
+
+        <h2 id="vamos-atividades">Agora Vamos a Atividades</h2>
+
+        <div class="exemplos">
+            <p>
+                Uma etapa por vez: estamos juntos no processo e o resultado virá
+            </p>
+
+            <section id="atividade01">
+                <h3>Atividade 01</h3>
+                <p>
+                    Uma sala de cinema oferece desconto na entrada de acordo com a idade do cliente.
+                    Escreva um programa em JavaScript que defina uma variável idade.
+                    Se a idade for menor que 18 anos, o programa deve exibir a mensagem: "Você tem direito ao ingresso promocional!"
+                    Caso contrário (se tiver 18 anos ou mais), deve exibir: "Você deve pagar o valor integral do ingresso.".
+                </p>
+
+                <!-- teste atividade 01 -->
+                <div class="caixa-teste">
+                    <h3>Teste a Atividade 01</h3>
+
+                    <label for="idadeCliente">Digite a idade:</label><br>
+                    <input type="number" id="idadeCliente" value="16">
+                    <br>
+
+                    <button onclick="testarIdade()">Executar</button>
+
+                </div>
+
+                <div class="container-botao-codigo">
+                    <button onclick="mostrarCodigo('codigo01')">Ver código</button>
+                </div>
+                <pre id="codigo01" class="bloco-codigo" style="display: none;"><code>function testarIdade() {
+    var idade = document.getElementById("idadeCliente").value;
+
+    if (idade &lt; 18) {
+        alert("Você tem direito ao ingresso promocional!");
+    } else {
+        alert("Você deve pagar o valor integral do ingresso.");
+    }
+}</code></pre>
+
+                <script>
+                    function testarIdade() {
+                        var idade = document.getElementById("idadeCliente").value;
+
+                        if (idade < 18) {
+                            alert("Você tem direito ao ingresso promocional!");
+                        } else {
+                            alert("Você deve pagar o valor integral do ingresso.");
+                        }
+                    }
+
+                    // Alterna a exibição do bloco de código correspondente ao id passado
+                    function mostrarCodigo(id) {
+                        var bloco = document.getElementById(id);
+                        if (bloco.style.display === "none") {
+                            bloco.style.display = "block";
+                        } else {
+                            bloco.style.display = "none";
+                        }
+                    }
+                </script>
+
+                <section>
+                    <h3>Atividade 02</h3>
+                    <p>
+                        Uma loja de roupas oferece desconto de acordo com o valor total da compra do cliente.
+                        Escreva um programa em JavaScript que defina uma variável valorCompra.
+                        Se o valor da compra for maior ou igual a R$ 200, o programa deve exibir a mensagem: "Você ganhou 20% de desconto!"
+                        Se o valor for maior ou igual a R$ 100 (mas menor que R$ 200), deve exibir: "Você ganhou 10% de desconto!"
+                        Caso contrário (valor abaixo de R$ 100), deve exibir: "Sua compra não tem desconto."
+                    </p>
+
+                    <!-- teste atividade 02 -->
+                    <div class="caixa-teste">
+                        <h3>Teste a Atividade 02</h3>
+
+                        <label for="valorCompra">Digite o valor da compra (R$):</label><br>
+                        <input type="number" id="valorCompra" value="150">
+                        <br>
+
+                        <button onclick="testarDesconto()">Executar</button>
+                    </div>
+
+                    <div class="container-botao-codigo">
+                        <button onclick="mostrarCodigo('codigo02')">Ver código</button>
+                    </div>
+                    <pre id="codigo02" class="bloco-codigo" style="display: none;"><code>function testarDesconto() {
+    var valorCompra = document.getElementById("valorCompra").value;
+
+    if (valorCompra &gt;= 200) {
+        alert("Você ganhou 20% de desconto!");
+    } else if (valorCompra &gt;= 100) {
+        alert("Você ganhou 10% de desconto!");
+    } else {
+        alert("Sua compra não tem desconto.");
+    }
+}</code></pre>
+
+                    <script>
+                        function testarDesconto() {
+                            var valorCompra = document.getElementById("valorCompra").value;
+
+                            if (valorCompra >= 200) {
+                                alert("Você ganhou 20% de desconto!");
+                            } else if (valorCompra >= 100) {
+                                alert("Você ganhou 10% de desconto!");
+                            } else {
+                                alert("Sua compra não tem desconto.");
+                            }
+                        }
+                    </script>
+
+                </section>
+            </section>
+        </div>
+    </section>
+
+    <!-- rodapé. -->
+    <footer>Trabalho Final JS ads 2026/2 </footer>
+
+</body>
+</html>

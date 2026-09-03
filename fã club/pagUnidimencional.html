@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vetores Unidimensionais</title>
+    <link rel="stylesheet" type="text/css" href="css/site.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="imgs/imagemLogo.png" alt="logo da página" title="logo da página">
+        <h1>Vetores Unidimensionais</h1>
+    </header>
+
+    <nav>
+        <a href="pagPrincipal.html"> <div class="opcao"> Início </div> </a>
+        <a href="javascript:void(0)" onclick="rolarParaAtividade()"> <div class="opcao"> Atividade </div> </a>
+        <a href="pagBidirecionais.html"> <div class="opcao"> Proxima Trilha </div> </a>
+    </nav>
+
+    <section>
+        <h2>Resumo</h2>
+
+        <p style="text-align: center;">
+            Vetores (arrays) unidimensionais são estruturas que permitem armazenar vários valores em uma única variável, organizados em posições (índices) que começam do zero. Eles funcionam como uma prateleira numerada: cada posição guarda um item, e podemos acessar, percorrer ou modificar qualquer um deles usando seu número de posição.
+        </p>
+
+        <div class="exemplos" id="blocoExemplos">
+
+            <section>
+                <h3>Exemplo 01</h3>
+                <p>
+                    Imagine que estamos programando o sistema de vendas da loja. Ele precisa somar o valor de todos os produtos guardados em um vetor de preços.
+                </p>
+
+                <img src="imgs/exemploVetor01.png" alt="Código de exemplo mostrando o percurso de um vetor para somar preços" title="Exemplo 01 - vetor unidimensional de preços" style="display: block; margin: 0 auto;">
+
+                <h3>Entendendo o código passo a passo</h3>
+                <dl>
+                    <dt>Declaração do vetor</dt>
+                    <dd>Criamos uma variável que guarda vários valores ao mesmo tempo, como <code>var precos = [50, 120, 35, 80];</code>. Cada valor fica em uma posição (índice), começando em 0.</dd>
+
+                    <dt>Percorrendo o vetor (for)</dt>
+                    <dd>Usamos um laço <code>for</code> para visitar cada posição do vetor, do índice 0 até o último (<code>precos.length - 1</code>), acessando cada valor com <code>precos[i]</code>.</dd>
+
+                    <dt>Acumulando o resultado</dt>
+                    <dd>A cada volta do laço, somamos o valor da posição atual a uma variável total, até percorrer todo o vetor.</dd>
+                </dl>
+
+                <section>
+                    <h3>Exemplo 02</h3>
+                    <p>
+                        Imagine agora que estamos verificando o estoque de baterias e queremos descobrir qual delas tem a maior carga registrada em um vetor.
+                    </p>
+
+                    <img src="imgs/exemploVetor02.png" alt="Código de exemplo mostrando a busca do maior valor em um vetor" title="Exemplo 02 - busca de maior valor em vetor" style="display: block; margin: 0 auto;">
+
+                    <h3>Entendendo o código passo a passo</h3>
+                    <dl>
+                        <dt>Valor inicial</dt>
+                        <dd>Começamos assumindo que o maior valor é o primeiro item do vetor (<code>cargas[0]</code>).</dd>
+
+                        <dt>Comparação a cada posição</dt>
+                        <dd>Percorremos o vetor com um laço, comparando cada posição com o maior valor encontrado até o momento.</dd>
+
+                        <dt>Atualização do maior valor</dt>
+                        <dd>Sempre que encontramos um valor maior que o atual "maior", atualizamos a variável. Ao final do laço, ela contém o maior valor do vetor.</dd>
+                    </dl>
+
+                    <h3>Agora vamos aos testes!</h3>
+
+                    <!-- teste ex 01 -->
+                    <div class="caixa-teste">
+                        <h3>Teste o Exemplo 01</h3>
+
+                        <label for="precosProdutos">Digite os preços separados por vírgula:</label><br>
+                        <input type="text" id="precosProdutos" value="50,120,35,80">
+                        <br>
+
+                        <button onclick="testarSomaVetor()">Executar</button>
+
+                        <p id="resultadoSomaVetor"></p>
+                    </div>
+
+                    <div class="container-botao-codigo">
+                        <button onclick="mostrarCodigo('codigo01')">Ver código </button>
+                    </div>
+
+                    <pre id="codigo01" class="bloco-codigo">
+<code>function testarSomaVetor() {
+    var texto = document.getElementById("precosProdutos").value;
+    var precos = texto.split(",").map(Number);
+    var total = 0;
+    var mensagem = "";
+
+    for (var i = 0; i < precos.length; i++) {
+        total += precos[i];
+        mensagem += "Produto " + i + ": R$ " + precos[i] + "<br>";
+    }
+
+    mensagem += "Total da venda: R$ " + total;
+
+    document.getElementById("resultadoSomaVetor").innerHTML = mensagem;
+}</code>
+                    </pre>
+
+                    <!-- teste ex 02 -->
+                    <div class="caixa-teste">
+                        <h3>Teste o Exemplo 02</h3>
+
+                        <label for="cargasBaterias">Digite as cargas separadas por vírgula:</label><br>
+                        <input type="text" id="cargasBaterias" value="45,80,62,90,55">
+                        <br>
+
+                        <button onclick="testarMaiorCarga()">Executar</button>
+
+                        <p id="resultadoMaiorCarga"></p>
+                    </div>
+
+                    <div class="container-botao-codigo">
+                        <button onclick="mostrarCodigo('codigo02')">Ver codigo</button>
+                    </div>
+
+                    <pre id="codigo02" class="bloco-codigo">
+<code>function testarMaiorCarga() {
+    var texto = document.getElementById("cargasBaterias").value;
+    var cargas = texto.split(",").map(Number);
+    var maior = cargas[0];
+
+    for (var i = 1; i < cargas.length; i++) {
+        if (cargas[i] > maior) {
+            maior = cargas[i];
+        }
+    }
+
+    document.getElementById("resultadoMaiorCarga").innerHTML = "A maior carga encontrada foi: " + maior + "%";
+}</code>
+                    </pre>
+
+                </section>
+            </section>
+        </div>
+
+        <script>
+            function rolarParaAtividade() {
+                document.getElementById("atividade01").scrollIntoView({
+                    behavior: "smooth"
+                });
+            }
+
+            function mostrarCodigo(id) {
+                var bloco = document.getElementById(id);
+
+                if (bloco.style.display === "none") {
+                    bloco.style.display = "block";
+                } else {
+                    bloco.style.display = "none";
+                }
+            }
+
+            // soma do vetor de preços
+            function testarSomaVetor() {
+                var texto = document.getElementById("precosProdutos").value;
+                var precos = texto.split(",").map(Number);
+                var total = 0;
+                var mensagem = "";
+
+                for (var i = 0; i < precos.length; i++) {
+                    total += precos[i];
+                    mensagem += "Produto " + i + ": R$ " + precos[i] + "<br>";
+                }
+
+                mensagem += "Total da venda: R$ " + total;
+
+                document.getElementById("resultadoSomaVetor").innerHTML = mensagem;
+            }
+
+            // maior carga do vetor
+            function testarMaiorCarga() {
+                var texto = document.getElementById("cargasBaterias").value;
+                var cargas = texto.split(",").map(Number);
+                var maior = cargas[0];
+
+                for (var i = 1; i < cargas.length; i++) {
+                    if (cargas[i] > maior) {
+                        maior = cargas[i];
+                    }
+                }
+
+                document.getElementById("resultadoMaiorCarga").innerHTML = "A maior carga encontrada foi: " + maior + "%";
+            }
+        </script>
+
+        <h2>Agora Vamos a Atividades</h2>
+
+        <div class="exemplos">
+            <p>
+                Uma etapa por vez: estamos juntos no processo e o resultado virá
+            </p>
+
+            <section id="atividade01">
+                <h3>Atividade 01</h3>
+                <p>
+                    Uma loja quer calcular a média de avaliação de um produto, com base nas notas dadas pelos clientes.
+                    Escreva um programa em JavaScript que armazene as notas em um vetor e use um laço for para calcular a média dos valores.
+                </p>
+
+                <!-- teste atividade 01 -->
+                <div class="caixa-teste">
+                    <h3>Teste a Atividade 01</h3>
+
+                    <label for="notasAvaliacao">Digite as notas separadas por vírgula (0 a 10):</label><br>
+                    <input type="text" id="notasAvaliacao" value="8,9,7,10,6">
+                    <br>
+
+                    <button onclick="testarMediaNotas()">Executar</button>
+
+                    <p id="resultadoMediaNotas"></p>
+                </div>
+
+                <div class="container-botao-codigo">
+                    <button onclick="mostrarCodigo('codigoAtividade01')">Ver código </button>
+                </div>
+
+                <pre id="codigoAtividade01" class="bloco-codigo">
+<code>function testarMediaNotas() {
+    var texto = document.getElementById("notasAvaliacao").value;
+    var notas = texto.split(",").map(Number);
+    var soma = 0;
+
+    for (var i = 0; i < notas.length; i++) {
+        soma += notas[i];
+    }
+
+    var media = soma / notas.length;
+
+    document.getElementById("resultadoMediaNotas").innerHTML = "A média das notas é: " + media.toFixed(2);
+}</code>
+                </pre>
+
+                <script>
+                    function testarMediaNotas() {
+                        var texto = document.getElementById("notasAvaliacao").value;
+                        var notas = texto.split(",").map(Number);
+                        var soma = 0;
+
+                        for (var i = 0; i < notas.length; i++) {
+                            soma += notas[i];
+                        }
+
+                        var media = soma / notas.length;
+
+                        document.getElementById("resultadoMediaNotas").innerHTML = "A média das notas é: " + media.toFixed(2);
+                    }
+                </script>
+
+                <section>
+                    <h3>Atividade 02</h3>
+                    <p>
+                        O sistema da loja precisa verificar se um determinado produto está disponível em um vetor de códigos de estoque.
+                        Escreva um programa em JavaScript que percorra um vetor de códigos e verifique se um código informado pelo cliente está presente, contando também quantas vezes ele aparece.
+                    </p>
+
+                    <!-- teste atividade 02 -->
+                    <div class="caixa-teste">
+                        <h3>Teste a Atividade 02</h3>
+
+                        <label for="codigosEstoque">Digite os códigos separados por vírgula:</label><br>
+                        <input type="text" id="codigosEstoque" value="101,203,101,305,101,450">
+                        <br>
+
+                        <label for="codigoBusca">Digite o código a buscar:</label><br>
+                        <input type="number" id="codigoBusca" value="101">
+                        <br>
+
+                        <button onclick="testarBuscaCodigo()">Executar</button>
+
+                        <p id="resultadoBuscaCodigo"></p>
+                    </div>
+
+                    <div class="container-botao-codigo">
+                        <button onclick="mostrarCodigo('codigoAtividade02')">Ver código </button>
+                    </div>
+
+                    <pre id="codigoAtividade02" class="bloco-codigo">
+<code>function testarBuscaCodigo() {
+    var texto = document.getElementById("codigosEstoque").value;
+    var codigos = texto.split(",").map(Number);
+    var busca = parseInt(document.getElementById("codigoBusca").value);
+    var contador = 0;
+
+    for (var i = 0; i < codigos.length; i++) {
+        if (codigos[i] === busca) {
+            contador++;
+        }
+    }
+
+    var mensagem = "";
+    if (contador > 0) {
+        mensagem = "O código " + busca + " foi encontrado " + contador + " vez(es) no estoque.";
+    } else {
+        mensagem = "O código " + busca + " não foi encontrado no estoque.";
+    }
+
+    document.getElementById("resultadoBuscaCodigo").innerHTML = mensagem;
+}</code>
+                    </pre>
+
+                    <script>
+                        function testarBuscaCodigo() {
+                            var texto = document.getElementById("codigosEstoque").value;
+                            var codigos = texto.split(",").map(Number);
+                            var busca = parseInt(document.getElementById("codigoBusca").value);
+                            var contador = 0;
+
+                            for (var i = 0; i < codigos.length; i++) {
+                                if (codigos[i] === busca) {
+                                    contador++;
+                                }
+                            }
+
+                            var mensagem = "";
+                            if (contador > 0) {
+                                mensagem = "O código " + busca + " foi encontrado " + contador + " vez(es) no estoque.";
+                            } else {
+                                mensagem = "O código " + busca + " não foi encontrado no estoque.";
+                            }
+
+                            document.getElementById("resultadoBuscaCodigo").innerHTML = mensagem;
+                        }
+                    </script>
+
+                </section>
+            </section>
+        </div>
+    </section>
+
+    <!-- rodapé. -->
+    <footer>Trabalho Final JS ads 2026/2</footer>
+
+</body>
+</html>
